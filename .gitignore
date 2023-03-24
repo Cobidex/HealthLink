@@ -1,4 +1,0 @@
-# THIS FILE SPECIFIES THE FILE PATTERNS TO IGNORE FOR TRACKING AND COMMITING
-
-*.swp	# Used by vi/vim to store recovery versions of a file
-__pycache__	# Removing cached data that can be easily regenerated
