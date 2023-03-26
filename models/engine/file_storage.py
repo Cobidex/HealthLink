@@ -20,7 +20,7 @@ class FileStorage():
         '''returns all stored objects'''
         if cls:
             objects = self.__objects.items()
-            return {k: o for k, o in objects if eval(cls).__name__ in k}
+            return {k: o for k, o in objects if cls.__name__ in k}
         return self.__objects
 
     def new(self, obj):

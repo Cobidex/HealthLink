@@ -8,40 +8,40 @@ from models.base_model import BaseModel
 
 class test_FileStorage(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        cls.storage = FileStorage()
+        cls.ob = BaseModel()
+        cls.ob.save()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.ob.delete()
+        cls.storage.reload()
+
     def test_all_type(self):
-        storage = FileStorage()
-        self.assertTrue(isinstance(storage.all(), dict))
+        self.assertTrue(isinstance(self.storage.all(), dict))
 
 
     def test_all_vals(self):
-        storage = FileStorage()
-        ob = BaseModel()
-        ob.save()
-        m_dic = storage.all()
-        self.assertTrue(isinstance(m_dict.values()[0], BaseModel))
+        m_dic = self.storage.all()
+        key = '{}.{}'. format(self.ob.__class__.__name__, self.ob.id)
+        self.assertTrue(isinstance(m_dic[key], BaseModel))
 
 
     def test_all_keys(self):
-        storage = FileStorage()
-        ob = BaseModel()
-        ob.save()
-        m_dic = storage.all()
-        self.assertEqual(m_dic.keys()[0], 'BaseModel.'+ ob.id)
+        m_dic = self.storage.all()
+        self.assertIn('BaseModel.'+ self.ob.id, m_dic.keys())
 
 
     def test_get_obs(self):
-        storage = FileStorage()
-        ob = BaseModel()
-        ob.save()
-        obj = storage.get(BaseModel, ob.id)
+        obj = self.storage.get(BaseModel, self.ob.id)
         self.assertTrue(isinstance(obj, BaseModel))
 
 
     def test_count(self):
-        storage = FileStorage()
-        num = storage.count(BaseModel)
+        num = self.storage.count(BaseModel)
         ob = BaseModel()
         ob.save()
-        num2 = storage.count(BaseModel)
-        self.assertEqual(0, num)
-        self.assertEqual(1, num2)
+        num2 = self.storage.count(BaseModel)
+        self.assertEqual(1, num2 - num)
