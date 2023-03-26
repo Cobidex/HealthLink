@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''this module contains the db_storage class'''
 from os import getenv
 from sqlalchemy import create_engine
