@@ -11,10 +11,11 @@ from models.service import Service
 from models.hospital import Hospital
 from models.review import Review
 
+
 class FileStorage():
     __file_path = "file.json"
     __objects = {}
-    
+
     def all(self, cls=None):
         '''returns all stored objects'''
         if cls:
@@ -42,8 +43,9 @@ class FileStorage():
                 objects = json.load(f)
                 for value in objects.values():
                     self.new(eval(value['__class__'])(**value))
-        except:
+        except OSError:
             self.save()
+
     def delete(self, obj=None):
         '''deletes an object from the objects'''
         if obj:

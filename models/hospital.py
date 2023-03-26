@@ -10,14 +10,16 @@ from sqlalchemy import *
 
 if getenv('HLINK_DB') == 'db':
     hospital_service = Table('hospital_service', Base.metadata,
-            Column('hospital_id', String(60),
-                    ForeignKey('hospitals.id',
-                               onupdate='CASCADE', ondelete='CASCADE'),
-                   primary_key=True, nullable=False),
-            Column('service_id', String(60),
-                   ForeignKey('services.id',
-                              onupdate='CASCADE', ondelete='CASCADE'),
-                    primary_key=True, nullable=False))
+                             Column('hospital_id', String(60),
+                                    ForeignKey('hospitals.id',
+                                               onupdate='CASCADE',
+                                               ondelete='CASCADE'),
+                                    primary_key=True, nullable=False),
+                             Column('service_id', String(60),
+                                    ForeignKey('services.id',
+                                               onupdate='CASCADE',
+                                               ondelete='CASCADE'),
+                                    primary_key=True, nullable=False))
 
 
 class Hospital(BaseModel, Base):
@@ -39,7 +41,7 @@ class Hospital(BaseModel, Base):
         services = relationship('Service', secondary='hospital_service',
                                 back_populates="hospitals",
                                 viewonly=False)
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

@@ -4,6 +4,7 @@ from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 
+
 class Review(BaseModel, Base):
     '''defines the Reviews class'''
     if getenv('HLINK_DB') == 'db':

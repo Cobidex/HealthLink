@@ -15,7 +15,7 @@ class City(BaseModel, Base):
         state_id = Column(String(60), ForeignKey('states.id'),
                           nullable=False)
         hospitals = relationship('Hospital', backref='cities',
-                              cascade='all, delete-orphan')
+                                 cascade='all, delete-orphan')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

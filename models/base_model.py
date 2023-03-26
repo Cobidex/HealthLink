@@ -19,8 +19,10 @@ class BaseModel():
     '''the model to be inherited by all other classes'''
     if getenv('HLINK_DB') == 'db':
         id = Column(String(60), primary_key=True)
-        created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-        updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+        created_at = Column(DateTime, nullable=False,
+                            default=datetime.utcnow())
+        updated_at = Column(DateTime, nullable=False,
+                            default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         if args:
@@ -30,8 +32,8 @@ class BaseModel():
                 if key == '__class__':
                     continue
                 if key == 'updated_at' or key == 'created_at':
-                    val = datetime.strptime(value,\
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                    val = datetime.strptime(value,
+                                            '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, val)
                 else:
                     setattr(self, key, value)
@@ -69,7 +71,6 @@ class BaseModel():
         my_dict['created_at'] = self.created_at.isoformat()
         my_dict['updated_at'] = self.updated_at.isoformat()
         return (my_dict)
-
 
     def delete():
         '''deletes the current instance'''

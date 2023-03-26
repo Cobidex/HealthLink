@@ -16,7 +16,6 @@ class DBStorage():
     '''defines the DBStorage class'''
     __engine = None
     __session = None
-               
 
     def __init__(self):
         c = 'mysql+mysqldb://{}:{}@{}/{}'. format(getenv('HLINK_MYSQL_USER'),
@@ -65,7 +64,7 @@ class DBStorage():
         '''closes the current session'''
         self.__session.close()
 
-    def get(self,cls, id):
+    def get(self, cls, id):
         '''retrieves one object'''
         key = '{}.{}'. format(cls.__name__, id)
         return self.all().get(key)
@@ -73,4 +72,3 @@ class DBStorage():
     def count(self, cls=None):
         '''count numbe rof objects'''
         return len(self.all(cls))
-
