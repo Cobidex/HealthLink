@@ -19,29 +19,27 @@ class DBStorage():
                
 
     def __init__(self):
-        c = 'mysql+mysqldb://{}:{}@{}/{}'. format(getenv('HBNB_MYSQL_USER'),
-                                                  getenv('HBNB_MYSQL_PWD'),
-                                                  getenv('HBNB_MYSQL_HOST'),
-                                                  getenv('HBNB_MYSQL_DB'))
+        c = 'mysql+mysqldb://{}:{}@{}/{}'. format(getenv('HLINK_MYSQL_USER'),
+                                                  getenv('HLINK_MYSQL_PWD'),
+                                                  getenv('HLINK_MYSQL_HOST'),
+                                                  getenv('HLINK_MYSQL_DB'))
         self.__engine = create_engine(c, pool_pre_ping=True)
-        if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         '''gets objects of specific class'''
-        o_d = {}
+        objects = {}
         if cls:
             query = self.__session.query(eval(cls.__name__)).all()
-            for o in query:
-                k = "{}.{}". format(o.__class__.__name__, o.id)
-                o_d[k] = o
+            for row in query:
+                key = "{}.{}". format(row.__class__.__name__, row.id)
+                objects[key] = row
         else:
             for c in [State, City, User, Hospital, Service, Review]:
                 query = self.__session.query(c).all()
-                for o in query:
-                    k = "{}.{}". format(o.__class__.__name__, o.id)
-                    o_d[k] = o
-        return o_d
+                for row in query:
+                    key = "{}.{}". format(row.__class__.__name__, o.id)
+                    objects[key] = row
+        return objects
 
     def new(self, obj):
         '''adds the object to current database session'''

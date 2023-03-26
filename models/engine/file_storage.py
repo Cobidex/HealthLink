@@ -18,8 +18,8 @@ class FileStorage():
     def all(self, cls=None):
         '''returns all stored objects'''
         if cls:
-            o_d = self.__objects.items()
-            return {k: o for k, o in o_d if eval(cls).__name__ in k}
+            objects = self.__objects.items()
+            return {k: o for k, o in objects if eval(cls).__name__ in k}
         return self.__objects
 
     def new(self, obj):
@@ -29,18 +29,18 @@ class FileStorage():
 
     def save(self):
         '''serializes object to json file'''
-        my_dict = {}
+        objects = {}
         for key, value in self.all().items():
-            my_dict[key] = value.to_dict()
+            objects[key] = value.to_dict()
         with open(self.__file_path, "w") as f:
-            json.dump(my_dict, f)
+            json.dump(objects, f)
 
     def reload(self):
         '''deserializes JSON file to objects'''
         try:
             with open(self.__file_path) as f:
-                my_dict = json.load(f)
-                for value in my_dict.values():
+                objects = json.load(f)
+                for value in objects.values():
                     self.new(eval(value['__class__'])(**value))
         except:
             self.save()
