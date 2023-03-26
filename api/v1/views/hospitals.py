@@ -51,6 +51,12 @@ def POST_hospital(city_id):
             return jsonify({'message': 'Not a JSON'}), 400
         if 'name' not in req:
             return jsonify({'message': 'Missing name'}), 400
+        if 'address' not in req:
+            return jsonify({'message': 'Missing address'}), 400
+        if 'phone_number' not in req:
+            return jsonify({'message': 'Missing phone_number'}), 400
+        if 'email' not in req:
+            return jsonify({'message': 'Missing email'}), 400
         hospital = Hospital(**req)
         hospital.city_id = city_id
         hospital.save()
