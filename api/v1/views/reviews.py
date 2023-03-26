@@ -49,7 +49,7 @@ def POST_review(hospital_id):
             return jsonify({'message': 'Missing text'}), 400
         if 'user_id' not in req:
             return jsonify({'message': 'Missing user_id'}), 400
-        review = Review(**my_dict)
+        review = Review(**req)
         review.hospital_id = hospital_id
         review.save()
         return jsonify(review.to_dict()), 201

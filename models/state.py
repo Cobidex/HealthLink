@@ -18,7 +18,7 @@ class State(BaseModel, Base):
 
         def __init__(self, *args, **kwargs):
             '''initializes state'''
-            super().__Init__(*args, **kwargs)
+            super().__init__(*args, **kwargs)
 
         if getenv('HLINK_DB') != 'db':
             @property

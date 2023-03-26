@@ -42,7 +42,7 @@ def make():
         return jsonify({'message': 'Not a JSON'}), 400
     if 'name' not in req:
         return jsonify({'message': 'Missing name'}), 400
-    service = Service(**my_dict)
+    service = Service(**req)
     service.save()
     return jsonify(service.to_dict()), 201
 

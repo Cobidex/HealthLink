@@ -44,7 +44,7 @@ def POST_user():
     if 'password' not in req:
         return jsonify({"Error": "Missing password"}), 400
 
-    user = User(**o_d)
+    user = User(**req)
     user.save()
     return jsonify(user.to_dict())
 

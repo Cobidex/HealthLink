@@ -36,7 +36,7 @@ class DBStorage():
             for c in [State, City, User, Hospital, Service, Review]:
                 query = self.__session.query(c).all()
                 for row in query:
-                    key = "{}.{}". format(row.__class__.__name__, o.id)
+                    key = "{}.{}". format(row.__class__.__name__, row.id)
                     objects[key] = row
         return objects
 

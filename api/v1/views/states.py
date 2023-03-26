@@ -42,7 +42,7 @@ def POST_state():
         return jsonify({'message': 'Not a JSON'}), 400
     if 'name' not in req:
         return jsonify({'message': 'Missing name'}), 400
-    state = State(**my_dict)
+    state = State(**req)
     state.save()
     return jsonify(state.to_dict()), 201
 
