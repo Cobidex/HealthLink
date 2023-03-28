@@ -208,12 +208,19 @@ input.search-bar {
 }
 
 .right div {
-    border: #fdaeb5 solid 10px;
-    border-radius: 58% 55% 23% 77% / 45% 38% 32% 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 5px; */
+    margin-right: 35px;
+    /* border: #fdaeb5 solid 5px; */
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 58% 35% 23% 27% / 45% 38% 32% 55%;
     background-color:#ff5360 ;
 }
-div img {
+.right div img {
     width: 100%;
+    border-radius: 58% 35% 23% 27% / 45% 38% 32% 55%;
 }
 
 .right {
@@ -271,15 +278,6 @@ div img {
     font-size: 1.2em;
     line-height: 25px;
     font-family: inherit;
-}
-.service-cards div a {
-    display: inline-block;
-    padding-top: 10px;
-    color: rgb(122, 201, 247);
-    text-decoration: none;
-}
-.service-cards div a:hover {
-    color: #fff;
 }
 
 /* ===FOOTER=== */
