@@ -37,6 +37,10 @@ header {
     position: relative;
 }
 
+header .logo {
+    width: 25px;
+    height: 25px;
+}
 header h1 {
     /* text-transform: lowercase; */
     font-size: 1.7em;
