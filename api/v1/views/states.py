@@ -12,6 +12,14 @@ def GET_states():
     return jsonify([state.to_dict() for state in states.values()])
 
 
+@State_view.route('/states/<name>')
+def GET_states_name(name):
+    states = models.storage.all(State)
+    if type(name) == str:
+        return jsonify([state.to_dict() for state in states.values() if state.name == name])
+    return jsonify({"Error": "state name must be string"}), 404
+
+
 @State_view.route('/states/<state_id>')
 def GET_state(state_id):
     key = 'State.{}'. format(state_id)

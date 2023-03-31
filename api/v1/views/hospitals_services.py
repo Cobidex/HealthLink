@@ -48,7 +48,7 @@ def POST_service(hospital_id, service_id):
     if not service:
         return jsonify({"Error": "Service not found"}), 404
     for serve in hospital.services:
-        if service_id == amen.id:
+        if service_id == serve.id:
             return jsonify(serve.to_dict()), 200
     hospital.services.append(service)
     storage.save()

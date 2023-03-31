@@ -1,8 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''
     this module contains the base model for all classes of this project
 '''
 from os import getenv
+from hashlib import md5
 import uuid
 from datetime import datetime
 import models
@@ -35,6 +36,9 @@ class BaseModel():
                     val = datetime.strptime(value,
                                             '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, val)
+                elif key == 'password':
+                    value = md5(value.encode('utf-8')).hexdigest()
+                    setattr(self, key, value)
                 else:
                     setattr(self, key, value)
             if 'created_at' not in kwargs:
@@ -64,8 +68,9 @@ class BaseModel():
         my_dict = self.__dict__.copy()
         if '_sa_instance_state' in my_dict:
             del my_dict['_sa_instance_state']
-        if 'password' in my_dict:
-            del my_dict['password']
+        if getenv('HLINK_DB') == 'db':
+            if 'password' in my_dict:
+                del my_dict['password']
         cls = self.__class__.__name__
         my_dict['__class__'] = cls
         my_dict['created_at'] = self.created_at.isoformat()
